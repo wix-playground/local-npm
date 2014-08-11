@@ -30,6 +30,7 @@ module.exports = function (FAT_REMOTE, SKIM_REMOTE, port, pouchPort, urlBase, lo
   var db = level('./binarydb');
   var base = urlBase + '/tarballs';
 
+  var jsonParser = require('body-parser').json();
 
   if (loglevel > 1) {
     app.use(require('morgan')('dev'));
@@ -131,8 +132,17 @@ module.exports = function (FAT_REMOTE, SKIM_REMOTE, port, pouchPort, urlBase, lo
     });
     return doc;
   }
-  app.all('/*', function (req, res) {
-    res.redirect(SKIM_REMOTE + req.originalUrl);
+  app.put('/:name', jsonParser, function (req, res) {
+    var put = request.put({
+      url: FAT_REMOTE + '/' + req.params.name,
+      headers: req.headers,
+      body: JSON.stringify(req.body)
+    });
+    put.on('error', function (err) {
+      logger.info(err);
+      res.send(500, 'you are offline');
+    });
+    put.pipe(res);
   });
   var sync;
   function replicateSkim() {
