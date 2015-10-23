@@ -200,10 +200,7 @@ module.exports = function (argv) {
   }
   var sync;
   function replicateSkim() {
-    console.log('replicateSkim()');
-    console.log('skimRemote: ' + skimRemote);
     skimRemote.info().then(function (info) {
-      console.log('sync');
       sync = skimLocal.replicate.from(skimRemote, {
         live: true,
         batch_size: 200,
@@ -228,7 +225,6 @@ module.exports = function (argv) {
     });
   }
   function restartReplication() {
-    console.log('restartReplication()');
     // just keep going
     startingTimeout *= backoff;
     setTimeout(replicateSkim, Math.round(startingTimeout));
