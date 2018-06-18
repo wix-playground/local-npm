@@ -11,7 +11,9 @@
     "write-npmrc": "echo registry=http://127.0.0.1:3030/ > .npmrc",
     "main-test": "babel-node node_modules/.bin/_mocha --grep=$GREP test/test.js",
     "test-cleanup": "rm -f .npmrc",
-    "start": "node ./lib/bin.js"
+    "start": "node ./lib/bin.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": {
     "name": "Nolan Lawson",
@@ -33,12 +35,13 @@
     "level": "^1.3.0",
     "mkdirp": "^0.5.1",
     "morgan": "^1.2.2",
-    "pouchdb": "^5.0.0",
+    "pouchdb": "^6.3.0",
     "request": "^2.39.0",
     "semver": "^5.0.1",
     "serve-favicon": "^2.0.1",
     "through2": "^2.0.0",
-    "yargs": "^3.18.0"
+    "yargs": "^3.18.0",
+    "snyk": "^1.83.0"
   },
   "devDependencies": {
     "babel-cli": "^6.4.0",
@@ -60,5 +63,6 @@
     "node-fetch": "^1.3.3",
     "rimraf": "^2.5.0",
     "run-scripts": "^0.4.0"
-  }
+  },
+  "snyk": true
 }
