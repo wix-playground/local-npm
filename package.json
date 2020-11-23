@@ -38,7 +38,7 @@
     "semver": "^5.0.1",
     "serve-favicon": "^2.0.1",
     "through2": "^2.0.0",
-    "yargs": "^3.18.0"
+    "yargs": "^16.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.4.0",
